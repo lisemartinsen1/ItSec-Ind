@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hashing</title>
+</head>
+<body>
+    <form th:action="@{/getHash}" method="post">
+        <label for="input">Write something</label>
+        <input type="text" id="input" name="input">
+        <button type="submit">Hash</button>
+    </form>
+
+<div th:if="${input != null}">
+    <h2>Your Input: <span th:text="${input}"></span></h2>
+    <h2>MD5 HASH: <span th:text="${md5}"></span></h2>
+    <h2>SHA-256 HASH: <span th:text="${sha256}"></span></h2>
+</div>
+
+<div th:if="${error != null}">
+    <p th:text="${error}"></p>
+</div>
+</body>
+</html>
