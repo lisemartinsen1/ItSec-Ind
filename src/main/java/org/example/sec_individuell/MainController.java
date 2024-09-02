@@ -31,6 +31,7 @@ public class MainController {
     @GetMapping("/passwordCracker")
     public String crack(Model model, Authentication authentication) {
         setUsernameInModel(model, authentication);
+        model.addAttribute("submitted", false);
         return "cracking";
     }
 

@@ -16,16 +16,22 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <h2>Password Cracker</h2>
-<form th:action="@{/}" method="post">
+<form th:action="@{/crackPassw}" method="post">
     <label for="input">Write your hash</label>
     <input type="text" id="input" name="input">
     <button type="submit">Submit</button>
 </form>
 
-<div th:if="${input != null}">
-    <h2>Your Hash: <span th:text="${input}"></span></h2>
-    <h2>Your Password: <span th:text="${crackedPassword}"></span></h2>
+<div th:if="${submitted}">
+    <div th:if="${crackedPassword != null}">
+        <h2>Your Hash: <span th:text="${input}"></span></h2>
+        <h2>Your Password: <span th:text="${crackedPassword}"></span></h2>
+    </div>
+    <div th:if="${crackedPassword == null}">
+        <h2>Password not found for the provided hash.</h2>
+    </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

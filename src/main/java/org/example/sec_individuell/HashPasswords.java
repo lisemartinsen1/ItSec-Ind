@@ -1,44 +1,56 @@
 package org.example.sec_individuell;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 
-@Component
+@ComponentScan
 public class HashPasswords implements CommandLineRunner {
 
-@Autowired
-private final HashServices service;
+    private final HashServices service;
 
-String COMMON_PASSWORDS_FILE = "src/main/resources/10k-most-common.txt";
-String HASHED_PASSWORDS_FILE = "src/main/resources/hashedPasswords";
+    private static final String COMMON_PASSWORDS_FILE = "src/main/resources/10k-most-common.txt";
+    private static final String HASHED_PASSWORDS_FILE = "src/main/resources/hashedPasswords";
 
     public HashPasswords(HashServices service) {
         this.service = service;
     }
 
-    public void run(String...args) {
+    @Override
+    public void run(String... args) {
         hashMostCommonPasswordFile();
     }
 
+    public static void main(String[] args) {
+        HashPasswords hashPasswords = new HashPasswords(new HashServices());
+        hashPasswords.run(args);
+    }
+
+
+
     private void hashMostCommonPasswordFile() {
 
-        try {
+        try (
             BufferedReader br = new BufferedReader(new FileReader(COMMON_PASSWORDS_FILE));
             BufferedWriter bw = new BufferedWriter(new FileWriter(HASHED_PASSWORDS_FILE));
-
+        ){
             String line;
-            while((line = br.readLine()) != null) {
-                String hashedWord = service.hashInput(line, "SHA-256");
-                bw.write(hashedWord);
-                bw.newLine();
+            while ((line = br.readLine()) != null) {
+                try {
+                    String hashedWord = service.hashInput(line, "SHA-256");
+                    System.out.println(hashedWord);
+                    bw.write(hashedWord);
+                    bw.newLine();
+                } catch (NoSuchAlgorithmException e) {
+                    System.err.println("Hashing algorithm not found: " + e.getMessage());
+                }
             }
-        } catch (IOException | NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            System.err.println("IO Exception occurred: " + e.getMessage());
         }
     }
 }

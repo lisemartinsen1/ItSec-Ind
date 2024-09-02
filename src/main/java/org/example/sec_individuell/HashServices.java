@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class HashServices {
 
-    String hashInput(String input, String algorithm) throws NoSuchAlgorithmException {
+    public String hashInput(String input, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance(algorithm);
         byte[] hash = digest.digest(input.getBytes());
         StringBuilder hexString = new StringBuilder();
