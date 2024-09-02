@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Hashing</title>
+    <title>Cracking</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .btn-login {
@@ -15,22 +15,17 @@
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/getHash}" method="post">
-    <label for="input">Write something</label>
+<h2>Password Cracker</h2>
+<form th:action="@{/}" method="post">
+    <label for="input">Write your hash</label>
     <input type="text" id="input" name="input">
-    <button type="submit">Hash</button>
+    <button type="submit">Submit</button>
 </form>
 
 <div th:if="${input != null}">
-    <h2>Your Input: <span th:text="${input}"></span></h2>
-    <h2>MD5 HASH: <span th:text="${md5}"></span></h2>
-    <h2>SHA-256 HASH: <span th:text="${sha256}"></span></h2>
+    <h2>Your Hash: <span th:text="${input}"></span></h2>
+    <h2>Your Password: <span th:text="${crackedPassword}"></span></h2>
 </div>
-
-<div th:if="${error != null}">
-    <p th:text="${error}"></p>
-</div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

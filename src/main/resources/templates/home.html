@@ -13,6 +13,16 @@
         <button type="submit">Logout</button>
     </form>
 
+    <form th:action="@{/hash}" method="get">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <button type="submit">Hash</button>
+    </form>
+
+    <form th:action="@{/passwordCracker}" method="get">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <button type="submit">Password Cracker</button>
+    </form>
+
 
 </div>
 </body>
