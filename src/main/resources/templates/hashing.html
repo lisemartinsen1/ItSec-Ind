@@ -5,8 +5,17 @@
     <title>Hashing</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
         .btn-login {
             width: 50px;
+        }
+
+        .custom-bg {
+            background-color: #ccc4be;
+        }
+
+        .input-box {
+            width: 500px;
         }
 
     </style>
@@ -15,20 +24,26 @@
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/getHash}" method="post">
-    <label for="input">Write something</label>
-    <input type="text" id="input" name="input">
-    <button type="submit">Hash</button>
-</form>
+<div class="container p-3">
+    <form th:action="@{/getHash}" method="post" class="align-items-center justify content center">
+        <div class="form-group">
+            <label for="input" class="pb-2">Write something</label>
+            <input type="text" id="input" name="input" class="form-control input-box">
+        </div>
+        <button type="submit" class="btn btn-light">Hash</button>
+    </form>
 
-<div th:if="${input != null}">
-    <h2>Your Input: <span th:text="${input}"></span></h2>
-    <h2>MD5 HASH: <span th:text="${md5}"></span></h2>
-    <h2>SHA-256 HASH: <span th:text="${sha256}"></span></h2>
-</div>
 
-<div th:if="${error != null}">
-    <p th:text="${error}"></p>
+    <div th:if="${input != null}" class="pt-5">
+        <p>Your Input: <span th:text="${input}"></span></p>
+        <p>MD5 HASH: <span th:text="${md5}"></span></p>
+        <p>SHA-256 HASH: <span th:text="${sha256}"></span></p>
+    </div>
+
+    <div th:if="${error != null}">
+        <p th:text="${error}"></p>
+    </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
