@@ -14,15 +14,7 @@ public class SecIndividuellApplication {
         if (args.length == 0) {
             Dotenv dotenv = Dotenv.load();
             dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
-            SpringApplication.run(SecIndividuellApplication.class, args);
-
-        } else if(Objects.equals(args[0], "hashPasswords")) {
-
-            SpringApplication application = new SpringApplication(HashPasswords.class);
-            application.setWebApplicationType(WebApplicationType.NONE);
-            application.run(args);
         }
-
+        SpringApplication.run(SecIndividuellApplication.class, args);
     }
-
 }

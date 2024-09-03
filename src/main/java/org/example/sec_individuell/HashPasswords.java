@@ -1,20 +1,23 @@
 package org.example.sec_individuell;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 
-@ComponentScan
+@Component
 public class HashPasswords implements CommandLineRunner {
 
     private final HashServices service;
 
-    private static final String COMMON_PASSWORDS_FILE = "src/main/resources/10k-most-common.txt";
-    private static final String HASHED_PASSWORDS_FILE = "src/main/resources/hashedPasswords";
+    @Value("${hashedPasswordsFile}")
+    private String hashedPasswordsFile;
+
+    @Value("${commonPasswordsFile}")
+    private String commonPasswordsFile;
+
 
     public HashPasswords(HashServices service) {
         this.service = service;
@@ -25,18 +28,19 @@ public class HashPasswords implements CommandLineRunner {
         hashMostCommonPasswordFile();
     }
 
+    /*
     public static void main(String[] args) {
         HashPasswords hashPasswords = new HashPasswords(new HashServices());
         hashPasswords.run(args);
     }
 
-
+     */
 
     private void hashMostCommonPasswordFile() {
 
         try (
-            BufferedReader br = new BufferedReader(new FileReader(COMMON_PASSWORDS_FILE));
-            BufferedWriter bw = new BufferedWriter(new FileWriter(HASHED_PASSWORDS_FILE));
+            BufferedReader br = new BufferedReader(new FileReader(commonPasswordsFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(hashedPasswordsFile));
         ){
             String line;
             while ((line = br.readLine()) != null) {
