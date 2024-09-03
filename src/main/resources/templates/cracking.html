@@ -37,12 +37,12 @@
     </form>
 
     <div th:if="${submitted}">
-        <div th:if="${crackedPassword != null}">
-            <h2>Your Hash: <span th:text="${input}"></span></h2>
-            <h2>Your Password: <span th:text="${crackedPassword}"></span></h2>
+        <div th:if="${crackedPassword != null}" class="pt-3">
+            <p>Your Hash: <span th:text="${input}"></span></p>
+            <p>Your Password: <span th:text="${crackedPassword}"></span></p>
         </div>
-        <div th:if="${crackedPassword == null}">
-            <h2>Password not found for the provided hash.</h2>
+        <div th:if="${crackedPassword == null}" class="pt-3">
+            <p>Password not found for the provided hash.</p>
         </div>
     </div>
 </div>
