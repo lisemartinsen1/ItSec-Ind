@@ -1,4 +1,4 @@
-package org.example.sec_individuell;
+package org.example.sec_individuell.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

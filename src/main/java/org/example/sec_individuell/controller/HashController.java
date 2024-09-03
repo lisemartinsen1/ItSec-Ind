@@ -1,5 +1,6 @@
-package org.example.sec_individuell;
+package org.example.sec_individuell.controller;
 
+import org.example.sec_individuell.service.HashService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +11,9 @@ import java.security.NoSuchAlgorithmException;
 @Controller
 public class HashController {
 
-    private final HashServices service;
+    private final HashService service;
 
-    public HashController(HashServices service) {
+    public HashController(HashService service) {
         this.service = service;
     }
 

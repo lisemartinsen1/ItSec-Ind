@@ -1,5 +1,6 @@
-package org.example.sec_individuell;
+package org.example.sec_individuell.controller;
 
+import org.example.sec_individuell.service.PasswordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ public class PasswordController {
         this.ps = ps;
     }
 
+
     @PostMapping("/crackPassw")
     public String passwordCracker(@RequestParam String input, Model model) {
         String crackedPassword = ps.getCrackedPassword(input);
@@ -23,6 +25,8 @@ public class PasswordController {
         model.addAttribute("submitted", true);
         return "cracking";
     }
+
+
 
 
 }

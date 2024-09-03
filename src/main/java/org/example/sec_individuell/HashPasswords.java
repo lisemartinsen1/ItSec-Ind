@@ -1,7 +1,7 @@
 package org.example.sec_individuell;
+import org.example.sec_individuell.service.HashService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 @Component
 public class HashPasswords implements CommandLineRunner {
 
-    private final HashServices service;
+    private final HashService service;
 
     @Value("${hashedPasswordsFile}")
     private String hashedPasswordsFile;
@@ -19,7 +19,7 @@ public class HashPasswords implements CommandLineRunner {
     private String commonPasswordsFile;
 
 
-    public HashPasswords(HashServices service) {
+    public HashPasswords(HashService service) {
         this.service = service;
     }
 
@@ -27,14 +27,6 @@ public class HashPasswords implements CommandLineRunner {
     public void run(String... args) {
         hashMostCommonPasswordFile();
     }
-
-    /*
-    public static void main(String[] args) {
-        HashPasswords hashPasswords = new HashPasswords(new HashServices());
-        hashPasswords.run(args);
-    }
-
-     */
 
     private void hashMostCommonPasswordFile() {
 

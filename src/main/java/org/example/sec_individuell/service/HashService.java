@@ -1,4 +1,4 @@
-package org.example.sec_individuell;
+package org.example.sec_individuell.service;
 
 import org.springframework.stereotype.Service;
 
@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Service
-public class HashServices {
+public class HashService {
 
     public String hashInput(String input, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance(algorithm);

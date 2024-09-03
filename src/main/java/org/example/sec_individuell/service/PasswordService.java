@@ -1,7 +1,6 @@
-package org.example.sec_individuell;
+package org.example.sec_individuell.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -24,7 +23,7 @@ public class PasswordService {
         return findPassword(lineNr);
     }
 
-    public Integer findMatchingHash(String input)  {
+    private Integer findMatchingHash(String input)  {
         try (BufferedReader br = new BufferedReader(new FileReader(hashedPasswordsFile))) {
             String line;
             int counter = 0;
@@ -44,7 +43,7 @@ public class PasswordService {
         return null;
     }
 
-    public String findPassword(int lineNr) {
+    private String findPassword(int lineNr) {
         try (BufferedReader br = new BufferedReader(new FileReader(commonPasswordsFile))) {
             String password = null;
             for (int i = 0; i <= lineNr; i++) {
@@ -58,20 +57,5 @@ public class PasswordService {
             throw new RuntimeException(e);
         }
     }
-/*
-    public static void main(String[] args) {
-        try {
-            PasswordService service = new PasswordService();
-            String crackedPassword = service.getCrackedPassword("30c5461fc27b84f1f1ad0a83162a26882b22d11cdfa45978dd21c810056e8d0e");
-            if (crackedPassword != null) {
-                System.out.println("Cracked Password: " + crackedPassword);
-            } else {
-                System.out.println("Password not found.");
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
- */
 }
