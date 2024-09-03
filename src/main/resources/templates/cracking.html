@@ -15,26 +15,35 @@
             background-color: #ccc4be;
         }
 
+        .input-box {
+            width: 500px;
+        }
+
     </style>
 </head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h2>Password Cracker</h2>
-<form th:action="@{/crackPassw}" method="post">
-    <label for="input">Write your hash</label>
-    <input type="text" id="input" name="input">
-    <button type="submit">Submit</button>
-</form>
+<div class="container align-items-center justify content center">
 
-<div th:if="${submitted}">
-    <div th:if="${crackedPassword != null}">
-        <h2>Your Hash: <span th:text="${input}"></span></h2>
-        <h2>Your Password: <span th:text="${crackedPassword}"></span></h2>
-    </div>
-    <div th:if="${crackedPassword == null}">
-        <h2>Password not found for the provided hash.</h2>
+    <h3 class="pt-5 pb-3">Password Cracker</h3>
+    <form th:action="@{/crackPassw}" method="post">
+        <div class="form-group">
+            <label for="input" class="pb-2">Write your hash</label>
+            <input type="text" id="input" name="input" class="form-control input-box">
+        </div>
+        <button type="submit" class="btn btn-light">Submit</button>
+    </form>
+
+    <div th:if="${submitted}">
+        <div th:if="${crackedPassword != null}">
+            <h2>Your Hash: <span th:text="${input}"></span></h2>
+            <h2>Your Password: <span th:text="${crackedPassword}"></span></h2>
+        </div>
+        <div th:if="${crackedPassword == null}">
+            <h2>Password not found for the provided hash.</h2>
+        </div>
     </div>
 </div>
 
