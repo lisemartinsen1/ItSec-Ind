@@ -23,33 +23,7 @@
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<!--
-<nav class="navbar navbar-expand-lg " th:fragment="navbar">
-    <a class="navbar-brand" th:href="@{/index}">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/hash}">Hashing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/passwordCracker}">Password Cracker</a>
-            </li>
-            <li class="nav-item" th:if="${username == null}">
-                <a class="btn btn-login btn-primary p-1 text-white nav-link" th:href="@{/login}">Login</a>
-            </li>
-            <li class="nav-item" th:if="${username != null}">
-                <form th:action="@{/logout}" method="post" class="form-inline">
-                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                    <button type="submit" class="btn btn-danger p-1 nav-link text-white btn-logout">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</nav>  -->
+
 <div class="container mt-4">
     <div class="row">
         <div th:if="${username != null}" class="col-12 p-5 text-center">

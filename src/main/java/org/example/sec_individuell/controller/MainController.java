@@ -27,20 +27,6 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/hash")
-    public String hash(Model model, Authentication authentication) {
-        userService.setUsernameInModel(model, authentication);
-        return "hashing";
-    }
-
-    @GetMapping("/passwordCracker")
-    public String crack(Model model, Authentication authentication) {
-        userService.setUsernameInModel(model, authentication);
-        model.addAttribute("submitted", false);
-        return "cracking";
-    }
-
-
 }
 
 
