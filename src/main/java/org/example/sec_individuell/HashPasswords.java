@@ -12,8 +12,11 @@ public class HashPasswords implements CommandLineRunner {
 
     private final HashService service;
 
-    @Value("${hashedPasswordsFile}")
-    private String hashedPasswordsFile;
+    @Value("${md5PasswordsFile}")
+    private String md5PasswordsFile;
+
+    @Value("${sha256PasswordsFile}")
+    private String sha256PasswordsFile;
 
     @Value("${commonPasswordsFile}")
     private String commonPasswordsFile;
@@ -25,20 +28,20 @@ public class HashPasswords implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        hashMostCommonPasswordFile();
+        hashMostCommonPasswordFile("MD5", md5PasswordsFile);
+        hashMostCommonPasswordFile("SHA-256", sha256PasswordsFile);
     }
 
-    private void hashMostCommonPasswordFile() {
+    private void hashMostCommonPasswordFile(String hashAlg, String outputFile) {
 
         try (
             BufferedReader br = new BufferedReader(new FileReader(commonPasswordsFile));
-            BufferedWriter bw = new BufferedWriter(new FileWriter(hashedPasswordsFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile));
         ){
             String line;
             while ((line = br.readLine()) != null) {
                 try {
-                    String hashedWord = service.hashInput(line, "SHA-256");
-                    System.out.println(hashedWord);
+                    String hashedWord = service.hashInput(line, hashAlg);
                     bw.write(hashedWord);
                     bw.newLine();
                 } catch (NoSuchAlgorithmException e) {

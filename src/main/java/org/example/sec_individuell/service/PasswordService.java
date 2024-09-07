@@ -9,21 +9,30 @@ import java.io.*;
 @Service
 public class PasswordService {
 
-    @Value("${hashedPasswordsFile}")
-    private String hashedPasswordsFile;
+    @Value("${md5PasswordsFile}")
+    private String md5PasswordsFile;
+
+    @Value("${sha256PasswordsFile}")
+    private String sha256PasswordsFile;
 
     @Value("${commonPasswordsFile}")
     private String commonPasswordsFile;
 
     public String getCrackedPassword(String hashedPassword) {
-        Integer lineNr = findMatchingHash(hashedPassword);
-        if (lineNr == null) {
-            return null;
+        Integer lineNrForMD5 = findMatchingHash(hashedPassword, md5PasswordsFile);
+        Integer lineNrForSHA256 = findMatchingHash(hashedPassword, sha256PasswordsFile);
+        if (lineNrForMD5 != null) {
+            return findPassword(lineNrForMD5);
         }
-        return findPassword(lineNr);
+
+        if (lineNrForSHA256 != null) {
+            return findPassword(lineNrForSHA256);
+        }
+
+        return null;
     }
 
-    private Integer findMatchingHash(String input)  {
+    private Integer findMatchingHash(String input, String hashedPasswordsFile) {
         try (BufferedReader br = new BufferedReader(new FileReader(hashedPasswordsFile))) {
             String line;
             int counter = 0;
