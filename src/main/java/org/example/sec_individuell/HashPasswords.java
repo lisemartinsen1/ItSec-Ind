@@ -1,7 +1,7 @@
 package org.example.sec_individuell;
 import org.example.sec_individuell.service.HashService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
@@ -36,7 +36,7 @@ public class HashPasswords implements CommandLineRunner {
 
         try (
             BufferedReader br = new BufferedReader(new FileReader(commonPasswordsFile));
-            BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))
         ){
             String line;
             while ((line = br.readLine()) != null) {
